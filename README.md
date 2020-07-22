@@ -13,3 +13,15 @@ Annotation tool for named entities with ~active learning~ Not yet :(
 
 ## To run:
 - execute "python app.py"
+- Open internet browser and type "127.0.0.1/5000" to start annotations
+
+### commands
+- Select entities and use number keys (0-9) to change entity class.
+- Press key "E" to remove entity class (assigns "O" class to selected words)
+- Press load next button to load next sentence to be annotated
+- Press Retrieve labels to finish labeling of a sentence (And then press load next sentence if desired)
+
+## Note
+- The code is still being developed. It can be used, but it's by no means user friendly as of yet.
+- Labels must be inserted directly inside anno_tool.js (I hope to change this soon)
+- Number keys (from the keyboard) are used to attribute labels to selected text. Letter "E" from keyboard removes labels (assigns "O" labels to all selected words)
