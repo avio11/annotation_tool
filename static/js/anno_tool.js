@@ -23,7 +23,7 @@ var tag_colors = ["red",  "blue",      "green",         "yellow", "black",      
 // ]
 
 /*---------------------Communication JS<->python ---------------------*/
-
+// Sends annotated labels to backend (python)
 function JStoPY(){
   // $.get( "/getmethod/<javascript_data>" );
   $.post( "/postmethod", {
@@ -34,7 +34,7 @@ function JStoPY(){
   control.labels = []
   control.pos = []
 }
-
+// Receives text and suggested labels from backend (python)
 function PYtoJS(){
   $.get("/getpythondata", function(data) {
       // console.log($.parseJSON(text))
@@ -46,8 +46,15 @@ function PYtoJS(){
       highlight_entities()
   })
 }
+// Command to delete text from dataset
+function delete_text(){
+  $.post("/deleteTextEntry")
+}
 
-
+// Command to retrain ner model (for suggestions)
+function train_model(){
+  $.post("/retrainNER")
+}
 /*-------------------------- Initialization --------------------------*/
 
 function init(){
