@@ -39,7 +39,7 @@ def switch_sets(annotations):
         a.to_csv('data/labeled.csv', mode='a', header=True)
     # Drop first text (row) from unlabeled.csv (as it was already labeled)
     data = data.drop(0, axis=0)
-    data.to_csv('data/unlabeled.csv')
+    data.to_csv('data/unlabeled.csv', columns=['text'])
     # Increment counter and if cnt==2 retrain model (DELETE THIS IF retrain_NER() is functional) ############################# DELETE ################
     # model.cnt += 1
     # if model.cnt == 2:
@@ -69,9 +69,9 @@ def get_label_suggestions(sent):
 def delete_text_entry():
     print("DELETE_TEXT_ENTRY")
     data = pd.read_csv('data/unlabeled.csv')
-    data[1:].to_csv('data/unlabeled.csv')
-    get_python_data()
-    return
+    data[1:].to_csv('data/unlabeled.csv', columns=['text'])
+    # get_python_data()
+    return "done"
 
 # Train suggestions ner_model ---------------------------------------------------------------
 @app.route('/retrainNER', methods = ['POST'])
@@ -81,7 +81,7 @@ def retrain_NER():
         model.train()
         data = pd.read_csv('data/unlabeled.csv')
         get_python_data()
-    return
+    return "done"
 
 # MAIN ---------------------------------------------------------------------------------------
 if __name__ == "__main__":

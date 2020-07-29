@@ -14,8 +14,10 @@ var control = {
   last_label_idx: 0
 }
 // Variables to be replaced (these values will later be passed from the backend)
-var tags =       ["Nome", "matricula", "cargo_efetivo", "padrao", "quadro_permanente-suplementar", "fundamento_legal_do_abono", "orgao", "processo_gdf_sei", "vigencia", "siape"]
-var tag_colors = ["red",  "blue",      "green",         "yellow", "black",                         "purple",                    "gray",  "orange",           "cyan",      "pink"]
+// tags for abono
+// var tags =       ["Nome", "matricula", "cargo_efetivo", "padrao", "quadro_permanente-suplementar", "fundamento_legal_do_abono", "orgao", "processo_gdf_sei", "vigencia", "siape"]
+var tags =       ["nome", "matricula", "tipo_de_aposentadoria", "cargo",   "classe", "padrao", "quadro", "fundamento_legal", "orgao", "vigencia", "matricula_siape", "processo", "motivo"]
+var tag_colors = ["red",  "blue",      "green",                 "yellow",  "black",  "purple", "gray",   "orange",           "cyan",  "pink",     "brown",           "magenta",  "violet"]
 // var txt = [
 //   "Ola mundo, hoje esta um lindo dia. Vamos correr para o clube e jogar tenis. Nao tem nada melhor que atividade fisica em dia ensolarado.",
 //     "On July 15, 2020, between 20:00 and 22:00 UTC, a number of high-profile Twitter accounts, each with millions of followers, were compromised in a cyberattack to promote a bitcoin scam. The scam asked individuals to send bitcoin currency to a specific cryptocurrency wallet, with the promise that money sent would be doubled and returned. Based on sources speaking to Vice and TechCrunch, the perpetrators had gained access to Twitter's administrative tools so that they could alter the accounts themselves and post the tweets directly, with the access gained either possibly through paying off Twitter employees to use the tool, or from a compromised employee's account to access the tool directly.",
@@ -40,7 +42,7 @@ function PYtoJS(){
       // console.log($.parseJSON(text))
       control.split_txt = $.parseJSON(data)[0]
       control.labels = $.parseJSON(data)[1]
-      console.log(control.labels)
+      // console.log(control.labels)
       preprocess()
       load_text()
       highlight_entities()
@@ -81,8 +83,17 @@ function init(){
     window.addEventListener("keydown", function(event){
       key = event.code
       new_tag = Number(key[key.length - 1])
+      if(key == "KeyQ"){
+        new_tag = 10
+      }
+      if(key == "KeyW"){
+        new_tag = 11
+      }
+      if(key == "KeyR"){
+        new_tag = 12
+      }
       console.log(new_tag)
-      if(0<=new_tag && 9>=new_tag && new_tag < tags.length){
+      if(0<=new_tag && 12>=new_tag && new_tag < tags.length){
         control.last_label_idx = new_tag
         ctx.globalAlpha = 0.3
         // reprint_entities()
